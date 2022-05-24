@@ -6,11 +6,16 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 19:06:35 by preed             #+#    #+#             */
-/*   Updated: 2022/05/24 15:25:29 by preed            ###   ########.fr       */
+/*   Updated: 2022/05/24 17:11:34 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	philo_life(t_table *table)
+{
+	
+}
 
 void	philo_init(t_table *table)
 {
