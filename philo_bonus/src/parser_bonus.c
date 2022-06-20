@@ -6,7 +6,7 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 17:17:06 by preed             #+#    #+#             */
-/*   Updated: 2022/06/18 21:11:29 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/20 20:13:53 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	symbols_check(char *str)
 int	parcer(int argc, char *argv[], t_philo *philo)
 {
 	philo->num_eat = -1;
-	philo->stop = 0;
 	if (argc < 5 || argc > 6)
 		return (1);
 	else
@@ -40,7 +39,7 @@ int	parcer(int argc, char *argv[], t_philo *philo)
 	}
 	if (philo->philo_num < 0 || philo->time_dead < 0
 		|| philo->time_eat < 0 || philo->time_sleep < 0
-		|| (philo->num_eat < 0 && philo->num_eat != -1))
+		|| (philo->num_eat < 0 && argc == 6))
 		return (1);
 	return (0);
 }

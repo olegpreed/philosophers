@@ -6,7 +6,7 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 16:34:18 by preed             #+#    #+#             */
-/*   Updated: 2022/06/19 19:25:50 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/20 20:13:44 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ typedef struct s_philo {
 	int				time_sleep;
 	int				num_eat;
 	int				eat_count;
-	int				stop;
 	int				*pid;
 	sem_t			*sem_printf;
-	sem_t			*sem_data;
 	sem_t			*sem_fork;
-	sem_t			*sem_pulse;
+	sem_t			*sem_stop;
+	sem_t			*sem_stuffed;
 	long long int	start_time;
 	int				index;
 	long long int	t_meal;
@@ -41,7 +40,7 @@ typedef struct s_philo {
 }	t_philo;
 
 int				parcer(int argc, char *argv[], t_philo *philo);
-void			philo_init(t_philo *philo);
+void			init_sem(t_philo *philo);
 void			create_fork(t_philo *philo);
 void			ft_exit(t_philo *philo, const char *error, int i);
 void			start(t_philo *philo);

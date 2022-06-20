@@ -6,23 +6,11 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:20:45 by preed             #+#    #+#             */
-/*   Updated: 2022/06/19 19:58:32 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/20 20:44:27 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-void	*wait_children(void *arg)
-{
-	int		i;
-	t_philo	*philo;
-
-	i = -1;
-	philo = (t_philo *)arg;
-	while (++i < philo->philo_num)
-		waitpid(philo->pid[i], NULL, 0);
-	exit(0);
-}
 
 char	*make_name(char *name, int n)
 {
@@ -52,34 +40,27 @@ char	*make_name(char *name, int n)
 	return (result);
 }
 
-// void	say_goodbye(t_philo *philo)
-// {
-// 	int		i;
-// 	int		status;
-
-// 	i = 0;
-// 	while (i < philo->philo_num)
-// 		waitpid(philo->pid[i++], &status, 0);
-// 	i = -1;
-// 	while (++i < philo->philo_num)
-// 		kill(philo->pid[i], SIGKILL);
-// }
-
 void	ft_exit(t_philo *philo, const char *error, int i)
 {
 	int	j;
 
 	j = -1;
-	while (++j <= i)
-		kill(philo->pid[j], SIGKILL);
+	if (i)
+		while (++j < i)
+			kill(philo->pid[j], SIGKILL);
 	sem_close(philo->sem_printf);
 	sem_close(philo->sem_fork);
+	sem_close(philo->sem_stop);
+	if (philo->num_eat != -1)
+		sem_close(philo->sem_stuffed);
 	sem_unlink("/sem_print");
-	sem_unlink("/sem_forks"); // why
+	sem_unlink("/sem_forks");
+	sem_unlink("/sem_stuffed");
+	sem_unlink("/sem_stop");
 	free(philo->pid);
 	if (error)
 		printf("%s\n", error);
-	exit(0);
+	exit (0);
 }
 
 void	print_msg(t_philo *philo, const char *str)
@@ -88,10 +69,7 @@ void	print_msg(t_philo *philo, const char *str)
 
 	time = find_time();
 	sem_wait(philo->sem_printf);
-	sem_wait(philo->sem_data);
-	if (!philo->stop)
-		printf("%lld %d %s\n", time - philo->start_time, philo->index, str);
-	sem_post(philo->sem_data);
+	printf("%lld %d %s\n", time - philo->start_time, philo->index, str);
 	sem_post(philo->sem_printf);
 }
 
