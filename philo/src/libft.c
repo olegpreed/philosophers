@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   libft.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/20 19:17:28 by preed             #+#    #+#             */
-/*   Updated: 2022/05/24 17:10:55 by preed            ###   ########.fr       */
+/*   Created: 2022/06/02 16:25:22 by preed             #+#    #+#             */
+/*   Updated: 2022/06/02 16:26:10 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	pthread_run(t_table *table)
+static int	ft_putnbr(const char *str, int i)
+{
+	long long int	num;
+
+	num = 0;
+	i = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		if (num > 2147483647)
+			return (-1);
+		num = 10 * num + (str[i] - 48);
+		i++;
+	}
+	return ((int)num);
+}
+
+int	ft_atoi(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (i < table->all_philo)
+	while (str[i])
 	{
-		if (pthread_create(&table->philo[i]->tid, NULL, philo_life, (void *) table);
+		if (str[i] < '0' || str[i] > '9')
+			return (-1);
+		i++;
 	}
-}
-
-int	main(int argc, char *argv[])
-{
-	t_table	table;
-
-	(void)table;
-	if (!parcer(argc, argv, &table))
-	{
-		philo_init(&table);
-		pthread_run(&table);
-	}
-	else
-		printf("Error!\n");
-	return (0);
+	return (ft_putnbr(str, i));
 }

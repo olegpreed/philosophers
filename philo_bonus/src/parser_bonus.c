@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcer.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 16:15:23 by preed             #+#    #+#             */
-/*   Updated: 2022/05/23 18:28:12 by preed            ###   ########.fr       */
+/*   Created: 2022/06/14 17:17:06 by preed             #+#    #+#             */
+/*   Updated: 2022/06/18 21:11:29 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	symbols_check(char *str)
 {
@@ -23,23 +23,24 @@ int	symbols_check(char *str)
 	return (0);
 }
 
-int	parcer(int argc, char *argv[], t_table *table)
+int	parcer(int argc, char *argv[], t_philo *philo)
 {
-	table->nte = 0;
+	philo->num_eat = -1;
+	philo->stop = 0;
 	if (argc < 5 || argc > 6)
 		return (1);
 	else
 	{
-		table->all_philo = ft_atoi(argv[1]);
-		table->time_die = ft_atoi(argv[2]);
-		table->time_eat = ft_atoi(argv[3]);
-		table->time_sleep = ft_atoi(argv[4]);
+		philo->philo_num = ft_atoi(argv[1]);
+		philo->time_dead = ft_atoi(argv[2]);
+		philo->time_eat = ft_atoi(argv[3]);
+		philo->time_sleep = ft_atoi(argv[4]);
 		if (argc == 6)
-			table->nte = ft_atoi(argv[5]);
+			philo->num_eat = ft_atoi(argv[5]);
 	}
-	if (table->all_philo < 0 || table->time_die < 0
-		|| table->time_eat < 0 || table->time_sleep < 0
-		|| table->nte < 0)
+	if (philo->philo_num < 0 || philo->time_dead < 0
+		|| philo->time_eat < 0 || philo->time_sleep < 0
+		|| (philo->num_eat < 0 && philo->num_eat != -1))
 		return (1);
 	return (0);
 }

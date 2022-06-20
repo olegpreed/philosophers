@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 19:06:35 by preed             #+#    #+#             */
-/*   Updated: 2022/05/24 17:11:34 by preed            ###   ########.fr       */
+/*   Created: 2022/06/14 16:36:59 by preed             #+#    #+#             */
+/*   Updated: 2022/06/19 20:03:07 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-void	philo_life(t_table *table)
+int	main(int argc, char *argv[])
 {
-	
-}
+	t_philo	philo;
 
-void	philo_init(t_table *table)
-{
-	int	i;
-
-	i = 0;
-	table->philo = malloc(sizeof(t_philo *) * table->all_philo);
-	pthread_mutex_init(&table->print, NULL);
-	while (i < table->all_philo)
+	if (parcer(argc, argv, &philo))
 	{
-		table->philo[i] = malloc(sizeof(t_philo));
-		table->philo[i]->philo_num = i + 1;
-		pthread_mutex_init(&table->philo[i]->fork, NULL);
-		table->philo[i]->flag = 0;
-		i++;
+		printf("Error!\n");
+		return (0);
 	}
+	philo_init(&philo);
+	create_fork(&philo);
+	// exit_philo(&philo);
+	sem_wait(philo.sem_pulse);
+	ft_exit(&philo, "there was a tragedy", philo.philo_num - 1);
+	return (0);
 }

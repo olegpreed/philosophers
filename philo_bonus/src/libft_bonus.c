@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   libft_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/23 17:00:16 by preed             #+#    #+#             */
-/*   Updated: 2022/05/23 18:43:42 by preed            ###   ########.fr       */
+/*   Created: 2022/06/18 15:41:44 by preed             #+#    #+#             */
+/*   Updated: 2022/06/19 19:41:04 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
+
+int	ft_strlen(const char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+long long int	find_time(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
+}
 
 static int	ft_putnbr(const char *str, int i)
 {
@@ -41,4 +59,3 @@ int	ft_atoi(const char *str)
 	}
 	return (ft_putnbr(str, i));
 }
- 
