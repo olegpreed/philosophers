@@ -6,7 +6,7 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 19:17:28 by preed             #+#    #+#             */
-/*   Updated: 2022/06/06 14:14:30 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/21 19:48:00 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,23 @@ int	main(int argc, char *argv[])
 
 	if (!parcer(argc, argv, &table))
 	{
-		if (pthread_mutex_init(&table.print, NULL))
-			return (printf("ERROR: FAILED TO INIT MUTEX"));
-		if (pthread_mutex_init(&table.data_mut, NULL))
-			return (printf("ERROR: FAILED TO INIT MUTEX"));
+		if (pthread_mutex_init(&table.print, NULL)
+			|| pthread_mutex_init(&table.data_mut, NULL))
+		{
+			printf("ERROR: FAILED TO INIT MUTEX");
+			return (1);
+		}
 		if (philo_init(&table))
 		{
 			ft_free(&table);
 			return (1);
 		}
 		if (pthread_run(&table))
-			return (printf("ERROR: FAILED TO CREATE THREAD"));
+		{
+			printf("ERROR: FAILED TO CREATE THREAD");
+			return (1);
+		}
+		ft_free(&table);
 	}
 	else
 		printf("Error!\n");

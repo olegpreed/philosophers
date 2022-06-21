@@ -6,7 +6,7 @@
 #    By: preed <preed@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/20 19:17:10 by preed             #+#    #+#              #
-#    Updated: 2022/06/14 16:33:44 by preed            ###   ########.fr        #
+#    Updated: 2022/06/21 19:49:16 by preed            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME     = philo
 
 CC       = gcc
 INC      = includes
-FLAGS    = -Wall -Wextra -Werror
+FLAGS    = -Wall -Wextra -Werror 
+#FLAGS    = -Wall -Wextra -Werror -fsanitize=address
+
 HEADER   = philo.h
 
 OBJS_DIR = objs/

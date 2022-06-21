@@ -6,7 +6,7 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 16:25:22 by preed             #+#    #+#             */
-/*   Updated: 2022/06/02 16:26:10 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/21 18:48:08 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,12 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (ft_putnbr(str, i));
+}
+
+long long int	find_time(void)
+{
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }

@@ -6,7 +6,7 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 19:16:35 by preed             #+#    #+#             */
-/*   Updated: 2022/06/04 20:02:00 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/21 19:46:45 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_table {
 	int				time_sleep;
 	int				time_eat;
 	int				time_fork;
+	int				time_die;
 	long			start;
 	int				nte;
 	int				stop;
-	int				time_die;
 	pthread_t		check;
 	pthread_mutex_t	print;
 	pthread_mutex_t	data_mut;
@@ -56,5 +56,6 @@ long long int	find_time(void);
 void			*check_dead_or_alive(void *args);
 void			ft_wait(long long int time);
 void			ft_free(t_table *table);
+void			print_phil(t_philo *philo, const char *str);
 
 #endif

@@ -6,11 +6,22 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:00:16 by preed             #+#    #+#             */
-/*   Updated: 2022/06/06 13:36:17 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/21 19:46:37 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	sad_news(t_philo *philo, long long int time, int index)
+{
+	int	i;
+
+	i = 0;
+	pthread_mutex_lock(&philo->table->print);
+	printf("%lld %d is dead\n", time, index);
+	pthread_mutex_unlock(&philo->table->print);
+	return (1);
+}
 
 int	is_he_breathing(t_philo *philo)
 {
@@ -25,10 +36,8 @@ int	is_he_breathing(t_philo *philo)
 	{
 		if (time - philo[i].t_meal > philo->table->time_die)
 		{
-			philo->table->stop = 1;
-			printf("%lld %d %s\n", time - philo->table->start \
-				, philo[i].philo_num, "is dead");
-			return (1);
+			return (sad_news(philo, time - philo->table->start, \
+				philo[i].philo_num));
 		}
 		if (philo->table->nte != -1)
 		{
@@ -56,14 +65,6 @@ void	*check_dead_or_alive(void *args)
 		usleep(1000);
 	}
 	return (NULL);
-}
-
-long long int	find_time(void)
-{
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }
 
 void	ft_wait(long long int time)
