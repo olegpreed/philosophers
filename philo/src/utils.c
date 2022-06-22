@@ -6,7 +6,7 @@
 /*   By: preed <preed@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 17:00:16 by preed             #+#    #+#             */
-/*   Updated: 2022/06/21 19:46:37 by preed            ###   ########.fr       */
+/*   Updated: 2022/06/22 14:40:41 by preed            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	sad_news(t_philo *philo, long long int time, int index)
 	pthread_mutex_lock(&philo->table->print);
 	printf("%lld %d is dead\n", time, index);
 	pthread_mutex_unlock(&philo->table->print);
+	philo->table->stop = 1;
 	return (1);
 }
 
